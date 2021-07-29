@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AlgorithmPracticing
 {
@@ -8,14 +9,31 @@ namespace AlgorithmPracticing
     {
         static void Main(string[] args)
         {
-            int[,] grid = new int[3, 3] { { 2, 1, 1 }, { 1, 1, 0 }, { 0, 1, 1 } };
-            var result = OrangesRotting(grid);
+            var str = "blmossomla";
+            var result = CheckPalindrome(str);
         }
 
         /************** Medium ***********/
+        private static bool CheckPalindrome(string str)
+        {
+            str = Regex.Replace(str, "[^a-zA-Z0-9]", string.Empty);
+            var length = str.Length;
+            for (var i = 0; i < (length / 2); i++)
+            {
+                if (str[i] != str[length - 1 - i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         #region Rotting Oranges
         private static int OrangesRotting(int[,] grid)
         {
+            //int[,] grid = new int[3, 3] { { 2, 1, 1 }, { 1, 1, 0 }, { 0, 1, 1 } };
+            //var result = OrangesRotting(grid);
+
             if (grid.GetLength(0) > 0 && grid.GetLength(0) > 0)
             {
                 if (grid[0, 0] != 2) return 0;
