@@ -9,13 +9,37 @@ namespace AlgorithmPracticing
     {
         static void Main(string[] args)
         {
-            var str = "blmossomla";
-            var result = CheckPalindrome(str);
+            
         }
 
         /************** Medium ***********/
+        #region Roman Numeral Converter
+        private static string RomanNumeralConverter(int number)
+        {
+            // var result = RomanNumeralConverter(43);
+            var decimalValue = new int[] { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+            var romanNumeral = new string[] {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+
+            var result = "";
+            for (var index = 0; index < decimalValue.Length; index++)
+            {
+                while (decimalValue[index] <= number)
+                {
+                    result += romanNumeral[index];
+                    number -= decimalValue[index];
+                }
+            }
+
+            return result;
+        }
+        #endregion
+
+        #region Check Palindrome
         private static bool CheckPalindrome(string str)
         {
+            //var str = "blmossomla";
+            //var result = CheckPalindrome(str);
+
             str = Regex.Replace(str, "[^a-zA-Z0-9]", string.Empty);
             var length = str.Length;
             for (var i = 0; i < (length / 2); i++)
@@ -27,6 +51,7 @@ namespace AlgorithmPracticing
             }
             return true;
         }
+        #endregion
 
         #region Rotting Oranges
         private static int OrangesRotting(int[,] grid)
